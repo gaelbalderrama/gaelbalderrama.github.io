@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página personal de Gael Balderrama, estudiante de Ingeniería en Sistemas Computacionales en la Universidad La Salle Chihuahua.">
+  <!-- El título es lo que aparece en la pestaña del navegador -->
+  <title>Gael Balderrama</title>
+
+  <!-- El CSS define cómo se ve la página: colores, letras y espacios -->
+  <style>
+    :root {
+      --base: #faf8ff;
+      --tinta: #1d1b3a;
+      --suave: #5f5b7a;
+      --violeta: #6a4cf0;
+      --coral: #ff7a6b;
+      --menta: #2ec4a6;
+      --sol: #ffc857;
+      --cielo: #4aa8ff;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--base); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--tinta);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      /* Fondo suave con manchas de color pastel */
+      background-image:
+        radial-gradient(42rem 30rem at 8% -4%, #e4dcff, transparent 70%),
+        radial-gradient(36rem 28rem at 100% 8%, #ffe1d6, transparent 70%),
+        radial-gradient(44rem 30rem at 50% 100%, #d6f5ec, transparent 70%);
+      background-repeat: no-repeat;
+    }
+
+    .pagina {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 1.25rem 1.25rem 3rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    /* Tarjetas: bloques blancos con esquinas redondeadas y sombra suave */
+    .tarjeta {
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 2px rgba(29, 27, 58, 0.06), 0 14px 34px -14px rgba(106, 76, 240, 0.22);
+    }
+
+    h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -0.02em; }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    /* Puntito de color antes de cada título */
+    h2::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--punto, var(--violeta));
+    }
+
+    p { margin: 0 0 1rem; max-width: 62ch; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Encabezado principal */
+    .portada {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f1ecff 60%, #e3f1ff 100%);
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 1.4rem;
+      background: linear-gradient(135deg, var(--violeta), var(--cielo));
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 22px -8px rgba(106, 76, 240, 0.55);
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 9vw, 3.8rem);
+      font-weight: 800;
+    }
+
+    .subtitulo { margin-top: 0.6rem; color: var(--suave); font-size: 1.12rem; }
+
+    /* Intereses: etiquetas de colores */
+    .intereses { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+    .intereses li {
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      background: var(--fondo-etiqueta);
+      color: var(--texto-etiqueta);
+    }
+    .intereses li:nth-child(1) { --fondo-etiqueta: #ece6ff; --texto-etiqueta: #4b2fd1; }
+    .intereses li:nth-child(2) { --fondo-etiqueta: #ffe4de; --texto-etiqueta: #b5382a; }
+    .intereses li:nth-child(3) { --fondo-etiqueta: #d7f5ec; --texto-etiqueta: #11765f; }
+    .intereses li:nth-child(4) { --fondo-etiqueta: #fff0c9; --texto-etiqueta: #8a5a00; }
+    .intereses li:nth-child(5) { --fondo-etiqueta: #dcedff; --texto-etiqueta: #1a5fa8; }
+
+    /* Lo que quiero aprender: rejilla de tarjetas numeradas */
+    .aprender { counter-reset: tema; }
+    .rejilla {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 1rem;
+    }
+    .tema {
+      counter-increment: tema;
+      padding: 1.1rem 1.2rem;
+      border-radius: 1.1rem;
+      background: var(--fondo-tema);
+      border-top: 4px solid var(--color-tema);
+    }
+    .tema::before {
+      content: counter(tema, decimal-leading-zero);
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--texto-tema);
+    }
+    .tema h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .tema p { color: var(--suave); font-size: 0.98rem; }
+    .tema:nth-child(1) { --fondo-tema: #f3efff; --color-tema: var(--violeta); --texto-tema: #4b2fd1; }
+    .tema:nth-child(2) { --fondo-tema: #ffefeb; --color-tema: var(--coral);   --texto-tema: #b5382a; }
+    .tema:nth-child(3) { --fondo-tema: #e6f8f2; --color-tema: var(--menta);   --texto-tema: #11765f; }
+    .tema:nth-child(4) { --fondo-tema: #fff6dc; --color-tema: var(--sol);     --texto-tema: #8a5a00; }
+    .tema:nth-child(5) { --fondo-tema: #e8f3ff; --color-tema: var(--cielo);   --texto-tema: #1a5fa8; }
+
+    /* Tarjeta de GitHub */
+    .github {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, #6a4cf0, #4a6cf0);
+    }
+    .github h2 { color: #fff; margin-bottom: 0.4rem; }
+    .github h2::before { background: var(--sol); }
+    .github p { color: #ece8ff; }
+
+    .boton {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--violeta);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .boton:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.35); }
+    .boton:focus-visible { outline: 3px solid var(--sol); outline-offset: 3px; }
+
+    footer { text-align: center; color: var(--suave); font-size: 0.9rem; }
+    footer p { margin: 0 auto; }
+
+    /* Pantallas medianas y grandes */
+    @media (min-width: 46rem) {
+      .pagina { padding-top: 2.5rem; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .portada { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 1.75rem; padding: 2.75rem 2.5rem; }
+      .avatar { width: 6rem; height: 6rem; border-radius: 1.8rem; font-size: 2rem; flex: none; }
+      .aprender, .github, footer { grid-column: 1 / -1; }
+      .github { flex-direction: row; align-items: center; justify-content: space-between; padding: 1.75rem 2rem; }
+      .tarjeta { padding: 1.75rem; }
+    }
+
+    /* Respeta a quien prefiere menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .boton { transition: none; }
+      .boton:hover { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="pagina">
+
+    <!-- Encabezado: iniciales, nombre y datos principales -->
+    <header class="tarjeta portada">
+      <div class="avatar" aria-hidden="true">GB</div>
+      <div>
+        <h1>Gael Balderrama</h1>
+        <p class="subtitulo">Estudiante de primer semestre de Ingeniería en Sistemas Computacionales en la Universidad La Salle Chihuahua.</p>
+      </div>
+    </header>
+
+    <!-- Sobre mí -->
+    <section class="tarjeta">
+      <h2>Sobre mí</h2>
+      <p>Soy Gael y estoy empezando en el mundo de la programación. Me interesa entender cómo funcionan las cosas por dentro y convertir ideas en proyectos reales.</p>
+      <p>Esta página es uno de mis primeros proyectos: la escribí con HTML y CSS, sin librerías.</p>
+    </section>
+
+    <!-- Intereses (una lista) -->
+    <section class="tarjeta" style="--punto: var(--coral);">
+      <h2>Mis intereses</h2>
+      <ul class="intereses">
+        <li>Programación</li>
+        <li>Videojuegos</li>
+        <li>Deportes</li>
+        <li>Redes sociales</li>
+        <li>Música</li>
+      </ul>
+    </section>
+
+    <!-- Lo que quiero aprender (tarjetas numeradas) -->
+    <section class="tarjeta aprender" style="--punto: var(--menta);">
+      <h2>Lo que quiero aprender</h2>
+      <div class="rejilla">
+        <article class="tema">
+          <h3>Programación</h3>
+          <p>Python, algoritmos y estructuras de datos.</p>
+        </article>
+        <article class="tema">
+          <h3>Desarrollo web</h3>
+          <p>HTML, CSS y JavaScript.</p>
+        </article>
+        <article class="tema">
+          <h3>Datos</h3>
+          <p>Bases de datos y SQL.</p>
+        </article>
+        <article class="tema">
+          <h3>Herramientas</h3>
+          <p>Git, GitHub y trabajo en equipo.</p>
+        </article>
+        <article class="tema">
+          <h3>Desarrollo móvil</h3>
+          <p>Apps con Kotlin para Android y Swift para iPhone.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Enlace a GitHub -->
+    <section class="tarjeta github">
+      <div>
+        <h2>Mi código</h2>
+        <p>Aquí voy subiendo mis proyectos: github.com/gaelbalderrama</p>
+      </div>
+      <a class="boton" href="https://github.com/gaelbalderrama" target="_blank" rel="noopener">Ver mi perfil de GitHub</a>
+    </section>
+
+    <footer>
+      <p>© 2026 Gael Balderrama</p>
+    </footer>
+
+  </main>
+</body>
+</html>
